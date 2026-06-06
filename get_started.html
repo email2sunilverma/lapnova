@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get started with LapNova - A powerful Flutter application for mobile computing">
+    <meta name="keywords" content="LapNova, Flutter, Mobile App, Getting Started">
+    <title>Get Started with LapNova</title>
+    <style>
+        /* ============================================
+           CSS Variables
+           ============================================ */
+        :root {
+            --primary-color: #0066cc;
+            --primary-dark: #004499;
+            --primary-light: #3399ff;
+            --secondary-color: #ff6b35;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --background: #ffffff;
+            --surface: #f8f9fa;
+            --surface-alt: #e9ecef;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6c757d;
+            --border-color: #dee2e6;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --mono-font: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            --max-width: 1200px;
+        }
+
+        /* ============================================
+           Reset & Base Styles
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           Typography
+           ============================================ */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        code {
+            background-color: var(--surface-alt);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+
+        /* ============================================
+           Container & Layout
+           ============================================ */
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ============================================
+           Header
+           ============================================ */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content .logo {
+            color: white;
+        }
+
+        .header-content .tagline {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 1rem;
+            }
+
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .header-content .tagline {
+                font-size: 1rem;
+            }
+        }
+
+        /* ============================================
+           Navigation
+           ============================================ */
+        .nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-link {
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                padding: 0.75rem 1rem;
+                border-bottom: none;
+                border-left: 3px solid transparent;
+            }
+
+            .nav-link:hover {
+                border-left-color: var(--primary-color);
+                border-bottom-color: transparent;
+            }
+        }
+
+        /* ============================================
+           Sections
+           ============================================ */
+        .section {
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* ============================================
+           Feature Grid
+           ============================================ */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+           Requirements Section
+           ============================================ */
+        .requirements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .requirement-item {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .requirement-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .requirement-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .requirement-version {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .requirement-item p {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .requirement-item .link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .requirement-item .link:hover {
+            background-color: var(--primary-dark);
+            text-decoration: none;
+        }
+
+        /* ============================================
+           Verification Box
+           ============================================ */
+        .verification {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 102, 204, 0.02) 100%);
+            padding: 2rem;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .verification h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* ============================================
+           Steps
+           ============================================ */
+        .step {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .step:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            color: var(--text-primary);
+            margin-top: 0;
+        }
+
+        .step-content p {
+            margin-bottom: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .step {
+                gap: 1rem;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ============================================
+           Code Block
+           ============================================ */
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .code-block code {
+            background: none;
+            padding: 0;
+            color: inherit;
+            font-size: inherit;
+        }
+
+        /* ============================================
+           Setup List
+           ============================================ */
+        .setup-list {
+            list-style-position: inside;
+            padding-left: 1rem;
+            margin: 1rem 0;
+        }
+
+        .setup-list li {
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================
+           Tip Box
+           ============================================ */
+        .tip {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 107, 53, 0.02) 100%);
+            padding: 1.5rem;
+            border-left: 4px solid var(--secondary-color);
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .tip strong {
+            color: var(--secondary-color);
+        }
+
+        /* ============================================
+           Features List
+           ============================================ */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            color: var(--primary-color);
+        }
+
+        .feature-item p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+           Next Steps List
+           ============================================ */
+        .next-steps-list {
+            list-style-position: inside;
+            padding-left: 1rem;
+        }
+
+        .next-steps-list li {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .next-steps-list a {
+            font-weight: 500;
+        }
+
+        /* ============================================
+           Support Grid
+           ============================================ */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .support-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .support-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .support-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .support-card p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* ============================================
+           Buttons
+           ============================================ */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* ============================================
+           Small Text
+           ============================================ */
+        .small-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================
+           Footer
+           ============================================ */
+        .footer {
+            background-color: var(--text-primary);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-content p {
+            margin: 0 0 1rem 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-links {
+                gap: 1rem;
+            }
+        }
+
+        /* ============================================
+           Responsive Design
+           ============================================ */
+        @media (max-width: 1024px) {
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .feature-grid,
+            .requirements,
+            .features-list,
+            .support-grid {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                gap: 0;
+            }
+
+            .nav-link {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .step {
+                gap: 1rem;
+            }
+
+            .code-block {
+                font-size: 0.8rem;
+                padding: 1rem;
+            }
+
+            .feature-grid,
+            .requirements,
+            .features-list,
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
+           Print Styles
+           ============================================ */
+        @media print {
+            .nav {
+                display: none;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            a {
+                text-decoration: underline;
+            }
+
+            .code-block {
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">LapNova</h1>
+                <p class="tagline">A powerful Flutter application for modern mobile computing</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="#overview" class="nav-link">Overview</a>
+            <a href="#prerequisites" class="nav-link">Prerequisites</a>
+            <a href="#installation" class="nav-link">Installation</a>
+            <a href="#setup" class="nav-link">Setup</a>
+            <a href="#first-steps" class="nav-link">First Steps</a>
+            <a href="#features" class="nav-link">Features</a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="section">
+                <h2 class="section-title">Welcome to LapNova</h2>
+                <p class="section-text">
+                    LapNova is a comprehensive Flutter application designed to provide a seamless mobile computing experience. 
+                    Whether you're building for iOS, Android, or web, LapNova offers a robust foundation with modern architecture 
+                    and best practices built-in.
+                </p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🚀 Modern Architecture</h3>
+                        <p>Built with Clean Architecture and BLoC pattern for scalable applications</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📱 Cross-Platform</h3>
+                        <p>Deploy to iOS, Android, Web, Windows, Linux, and macOS</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚡ Performance</h3>
+                        <p>Optimized for speed with native performance on all platforms</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prerequisites Section -->
+            <section id="prerequisites" class="section">
+                <h2 class="section-title">Prerequisites</h2>
+                <p class="section-text">Before you begin, ensure you have the following installed:</p>
+                
+                <div class="requirements">
+                    <div class="requirement-item">
+                        <h3>Flutter SDK</h3>
+                        <p class="requirement-version">Version 3.0.0 or higher</p>
+                        <a href="https://flutter.dev/docs/get-started/install" class="link" target="_blank">
+                            Download Flutter
+                        </a>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <h3>Dart SDK</h3>
+                        <p class="requirement-version">Included with Flutter</p>
+                        <p>Automatically installed when you install Flutter</p>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <h3>Git</h3>
+                        <p class="requirement-version">Version 2.0 or higher</p>
+                        <a href="https://git-scm.com/downloads" class="link" target="_blank">
+                            Download Git
+                        </a>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <h3>IDE or Editor</h3>
+                        <p class="requirement-version">Android Studio, VS Code, or IntelliJ IDEA</p>
+                        <p>With Flutter and Dart plugins installed</p>
+                    </div>
+                </div>
+
+                <div class="verification">
+                    <h3>Verify Installation</h3>
+                    <p>Run the following command to check your setup:</p>
+                    <div class="code-block">
+                        <code>flutter doctor</code>
+                    </div>
+                    <p class="small-text">This command checks your environment and displays a report of the status of your Flutter installation.</p>
+                </div>
+            </section>
+
+            <!-- Installation Section -->
+            <section id="installation" class="section">
+                <h2 class="section-title">Installation</h2>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Clone the Repository</h3>
+                        <div class="code-block">
+                            <code>git clone https://github.com/yourusername/lapnova.git<br>cd lapnova</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Get Dependencies</h3>
+                        <p>Install all required Flutter packages</p>
+                        <div class="code-block">
+                            <code>flutter pub get</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Build Code Generation</h3>
+                        <p>Generate necessary code files (if applicable)</p>
+                        <div class="code-block">
+                            <code>flutter pub run build_runner build --delete-conflicting-outputs</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Verify Installation</h3>
+                        <p>Check if everything is set up correctly</p>
+                        <div class="code-block">
+                            <code>flutter pub get && flutter analyze</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Setup Section -->
+            <section id="setup" class="section">
+                <h2 class="section-title">Configuration & Setup</h2>
+                
+                <h3>Environment Variables</h3>
+                <p>Create a <code>.env</code> file in the root directory with your configuration:</p>
+                <div class="code-block">
+                    <code>API_URL=your_api_url<br>API_KEY=your_api_key<br>DEBUG_MODE=true</code>
+                </div>
+
+                <h3>Android Setup</h3>
+                <ol class="setup-list">
+                    <li>Navigate to the <code>android</code> directory</li>
+                    <li>Update <code>local.properties</code> with your SDK path if needed</li>
+                    <li>Run <code>flutter pub get</code> to sync Android dependencies</li>
+                </ol>
+
+                <h3>iOS Setup</h3>
+                <ol class="setup-list">
+                    <li>Navigate to the <code>ios</code> directory</li>
+                    <li>Run <code>pod install</code> to install dependencies</li>
+                    <li>Update deployment target if necessary in Xcode</li>
+                </ol>
+
+                <h3>Web Setup</h3>
+                <p>For web platform support, ensure you have the web enablement flag:</p>
+                <div class="code-block">
+                    <code>flutter config --enable-web</code>
+                </div>
+            </section>
+
+            <!-- First Steps Section -->
+            <section id="first-steps" class="section">
+                <h2 class="section-title">Running Your First Build</h2>
+
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>List Connected Devices</h3>
+                        <div class="code-block">
+                            <code>flutter devices</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Run Development Version</h3>
+                        <p>For Android (default device):</p>
+                        <div class="code-block">
+                            <code>flutter run</code>
+                        </div>
+                        <p>Or specify a device:</p>
+                        <div class="code-block">
+                            <code>flutter run -d device_id</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Run in Release Mode</h3>
+                        <div class="code-block">
+                            <code>flutter run --release</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Run on Web (Beta)</h3>
+                        <div class="code-block">
+                            <code>flutter run -d chrome</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <strong>💡 Tip:</strong> Use <code>flutter run</code> with hot reload for faster development. 
+                    Press <code>R</code> in the console to hot reload and <code>Q</code> to quit.
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="section">
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">🏗️</span>
+                        <h3>Clean Architecture</h3>
+                        <p>Organized structure with separate layers for presentation, domain, and data</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🔄</span>
+                        <h3>BLoC Pattern</h3>
+                        <p>State management using Business Logic Component pattern</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🗄️</span>
+                        <h3>Local Database</h3>
+                        <p>ObjectBox integration for fast, efficient local data storage</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🌍</span>
+                        <h3>Localization</h3>
+                        <p>Multi-language support built-in</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛣️</span>
+                        <h3>Route Management</h3>
+                        <p>Clean and organized routing system</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📡</span>
+                        <h3>Network Handling</h3>
+                        <p>Robust API communication and error handling</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Next Steps Section -->
+            <section id="next-steps" class="section">
+                <h2 class="section-title">Next Steps</h2>
+                <ul class="next-steps-list">
+                    <li>📖 Read the README.md for detailed documentation</li>
+                    <li>🚀 Check out the QUICKSTART.md for quick tips</li>
+                    <li>💻 Explore the <code>lib/</code> directory structure</li>
+                    <li>🧪 Run the test suite: <code>flutter test</code></li>
+                    <li>📚 Review the example implementations in the codebase</li>
+                    <li>🤝 Check out <a href="https://flutter.dev" target="_blank">Flutter Documentation</a></li>
+                </ul>
+            </section>
+
+            <!-- Support Section -->
+            <section id="support" class="section">
+                <h2 class="section-title">Support & Resources</h2>
+                <div class="support-grid">
+                    <div class="support-card">
+                        <h3>📚 Documentation</h3>
+                        <p>Access comprehensive guides and API documentation</p>
+                        <a href="https://flutter.dev/docs" class="btn" target="_blank">Learn More</a>
+                    </div>
+                    <div class="support-card">
+                        <h3>🐛 Issues</h3>
+                        <p>Report bugs or suggest features on GitHub</p>
+                        <a href="#" class="btn">GitHub Issues</a>
+                    </div>
+                    <div class="support-card">
+                        <h3>💬 Community</h3>
+                        <p>Join the Flutter community for discussions</p>
+                        <a href="https://flutter.dev/community" class="btn" target="_blank">Join Community</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 LapNova. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="https://github.com" target="_blank">GitHub</a>
+                    <a href="https://flutter.dev" target="_blank">Flutter</a>
+                    <a href="https://dart.dev" target="_blank">Dart</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
